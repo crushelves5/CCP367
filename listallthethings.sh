@@ -4,4 +4,3 @@ do
 	ls -i | grep $file
 done
 exit 0
-
