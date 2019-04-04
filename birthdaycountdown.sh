@@ -43,6 +43,32 @@ do
 		echo "Happy Canada Day"
 		festive=" Canada + You"
  	fi
+	
+	if [ $month -eq $birthmonth -a $day -eq $birthday ]
+	then
+		age=$((year-birthyear))
+		if [ $festive != "" ]
+		then
+			echo "Happy$festive Birthday. You are $age years old"
+		else
+			echo "Happy Birthday. You are $age years old"
+		fi
+	else
+		if [ $birthmonth -gt $month ] || [ $birthmonth -eq $month -a $birthday -gt $day ]
+		then
+			secondsTill=$(date -d "$year-$birthmonth-$birthday" +%s)
+			daysTill=$(((secondsTill-currentTime)/60/60/24))
+			echo "$daysTill day(s) till your next birthday"
+		else
+			year=$((year+1))
+			secondsTill=$(date -d "$year-$birthmonth-$birthday" +%s)
+			daysTill=$(((secondsTill-currentTime)/60/60/24))
+			echo "$daysTill day(s) till your next birthday"
+		fi
+	fi
+	echo "Enter STOP into month to exit"
+	echo "Enter Birth month(Int) (1 = January..12 = December)"
+	read birthmonth
 done
 
 exit 0
